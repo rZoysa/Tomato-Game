@@ -33,11 +33,11 @@ const Home = () => {
             <h1 className="text-6xl font-bold">Tomato Quiz Game</h1>
           </div>
           <div onClick={toggleDropdown} className="cursor-pointer mr-10 bg-white inline-flex justify-center items-center rounded-full p-2">
-            <p className="text-3xl font-itim">{userName}</p>
+            <p className="text-3xl font-itim select-none">{userName}</p>
             <img src="" alt="" srcSet="profile.png"/>
             {/* Dropdown menu */}
             {isDropdownOpen && (
-                <div className="absolute top-10 right-0 bg-white rounded-md shadow-md">
+                <div className="top-10 right-0 bg-white rounded-md shadow-md">
                   <ul>
                     {!userId ? (
                       <>
