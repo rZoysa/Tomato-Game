@@ -31,7 +31,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6 flex justify-center items-center">
-        <div className="bg-white w-4/12 h-4/5 text-center rounded-3xl">
+        <div className="bg-white w-4/12 text-center rounded-3xl">
           <img
             src=""
             alt=""
@@ -85,9 +85,9 @@ const Login = () => {
             </button>
             {error && <p className="text-red-500">{error}</p>}
           </form>
-          <h1 className="text-lg">
+          <h1 className="text-lg mb-10">
             Don&apos;t have and Account?
-            <a onClick={handleLogin} className="cursor-pointer text-[#0090CE]">
+            <a href="/Registration" className="cursor-pointer text-[#0090CE]">
               &nbsp;Sign Up
             </a>
           </h1>
