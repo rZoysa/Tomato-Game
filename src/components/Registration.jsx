@@ -12,6 +12,7 @@ const Registration = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [passwordMatchError, setPasswordMatchError] = useState("");
+  const [passwordLengthError, setPasswordLengthError] = useState("");
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -42,7 +43,18 @@ const Registration = () => {
       console.log("User registered:", user.uid);
       navigate("/home");
     } catch (error) {
-      setError(error.message);
+      // Handle specific registration errors and provide meaningful messages
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          setError("Email address is already in use.");
+          break;
+        case "auth/weak-password":
+          setError("Password is too weak. Choose a stronger password.");
+          break;
+        default:
+          setError("An error occurred during registration. Please try again later.");
+          break;
+      }
     }
   };
 
@@ -52,6 +64,12 @@ const Registration = () => {
       setPasswordMatchError("*Passwords do not match");
     } else {
       setPasswordMatchError("");
+    }
+
+    if (e.target.value.length < 6) {
+      setPasswordLengthError("Password should be at least 6 characters long");
+    } else {
+      setPasswordLengthError("");
     }
   };
 
@@ -126,6 +144,9 @@ const Registration = () => {
                   className="border rounded-md p-2 mb-2 shadow-md border-solid border-[#1D87C3]"
                   required
                 />
+                {passwordLengthError && (
+                  <p className="text-red-500">{passwordLengthError}</p>
+                )}
               </div>
               <div className="mb-4 flex flex-col">
                 <label
