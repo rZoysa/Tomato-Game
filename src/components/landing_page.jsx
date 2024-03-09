@@ -1,8 +1,20 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Landing_Page = () => {
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
 
+  useEffect(() => {
+    if (userId) {
+      // User is logged in
+      navigate('/home');
+    } else {
+      // User is not logged in
+      console.log('User is not logged in.');
+    }
+  }, [userId, navigate]); // Add navigate to the dependencies array
+  
   const directToLogin = () => {
     navigate("/Login");
   };

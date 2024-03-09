@@ -8,14 +8,14 @@ const Home = () => {
             This is the home page of your game. From here, you can navigate to
             various sections of the game.
           </p>
-          <ul>
-            <li>
+          <ul className="text-3xl font-itim text-white list-disc">
+            <li className="hover:text-4xl">
               <a href="/difficulty">Play</a>
             </li>
-            <li>
+            <li className="hover:text-4xl">
               <a href="/leaderboard">Leaderboard</a>
             </li>
-            <li>
+            <li className="hover:text-4xl">
               <a href="/instructions">Instructions</a>
             </li>
           </ul>
