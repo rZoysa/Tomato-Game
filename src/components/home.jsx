@@ -1,5 +1,15 @@
 const Home = () => {
-  const userId = localStorage.getItem("userId");
+  var userName = localStorage.getItem("userName");
+
+  if(!userName){
+    userName = "Guest";
+  }
+
+  const clearUserSession = () => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+  };
+  
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -9,8 +19,9 @@ const Home = () => {
           <div className="ml-10 mt-20">
             <h1 className="text-6xl font-bold">Tomato Quiz Game</h1>
           </div>
-          <div className="mr-10">
-            <p>{userId}</p>
+          <div className="mr-10 bg-white inline-flex justify-center items-center rounded-full p-2">
+            <p onClick={clearUserSession} className="text-3xl font-itim">{userName}</p>
+            <img src="" alt="" srcSet="profile.png"/>
           </div>
         </div>
 

@@ -40,10 +40,9 @@ const Registration = () => {
         email: email,
       });
 
-    //   console.log("User registered:", user.uid);
-
+      //   console.log("User registered:", user.uid);
+      setUserSession(uid, username);
       navigate("/home");
-      
     } catch (error) {
       // Handle specific registration errors and provide meaningful messages
       switch (error.code) {
@@ -54,10 +53,19 @@ const Registration = () => {
           setError("Password is too weak. Choose a stronger password.");
           break;
         default:
-          setError("An error occurred during registration. Please try again later.");
+          setError(
+            "An error occurred during registration. Please try again later."
+          );
           break;
       }
     }
+  };
+
+  // Function to set user session
+  const setUserSession = (userId, userName) => {
+    // You can use local storage to store user session
+    localStorage.setItem("userId", userId);
+    localStorage.setItem("userName", userName);
   };
 
   const handlePasswordChange = (e) => {

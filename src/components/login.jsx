@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "/firebaseConfig";
+import { getDatabase, ref, get } from "firebase/database";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,8 +23,17 @@ const Login = () => {
       const user = userCredential.user;
       console.log("User logged in:", user.uid);
 
-      // Set user session after successful login
-      setUserSession(user.uid);
+      
+
+       // Fetch user data from the database using userId
+       const db = getDatabase(app);
+       const userRef = ref(db, `users/${user.uid}`);
+       const snapshot = await get(userRef);
+       if (snapshot.exists()) {
+         const userData = snapshot.val();
+         // Save user data to the session
+         setUserSession(user.uid, userData.username);
+       }
 
       // Here you can navigate to the home page or perform any other action upon successful login
       navigate("/home");
@@ -49,9 +59,10 @@ const Login = () => {
   };
 
   // Function to set user session
-  const setUserSession = (userId) => {
+  const setUserSession = (userId, userName) => {
     // You can use local storage to store user session
     localStorage.setItem("userId", userId);
+    localStorage.setItem("userName", userName);
   };
 
   return (
