@@ -19,12 +19,14 @@ const Landing_Page = () => {
     <div className="flex justify-center items-center h-screen">
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6 flex justify-center items-center">
         <div className="flex justify-center items-center">
-
           <div className="flex flex-col items-center">
-            <p className="text-6xl">Tomato Quiz Game</p>
+            <div className="flex items-center">
+              <p className="text-6xl mr-5">Tomato Quiz Game </p>
+              <img src="" alt="" srcSet="Vector.png" />
+            </div>
             <br />
             <h1 className="text-3xl mb-10">Ready to play!</h1>
-            
+
             <div className="flex flex-col items-center w-full">
               <div className="mb-5 w-full flex items-center justify-center space-x-10">
                 <button
