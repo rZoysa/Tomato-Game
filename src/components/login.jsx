@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "/firebaseConfig";
 import { getDatabase, ref, get } from "firebase/database";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -124,9 +125,9 @@ const Login = () => {
           </form>
           <h1 className="text-lg mb-10">
             Don&apos;t have and Account?
-            <a href="/Registration" className="cursor-pointer text-[#0090CE]">
+            <Link to="/Registration" className="cursor-pointer text-[#0090CE]">
               &nbsp;Sign Up
-            </a>
+            </Link>
           </h1>
         </div>
       </div>
