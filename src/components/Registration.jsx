@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set, child } from "firebase/database";
 import { app } from "/firebaseConfig";
+import { Link } from "react-router-dom";
 
 const Registration = () => {
   const [username, setUsername] = useState("");
@@ -189,9 +190,9 @@ const Registration = () => {
           </form>
           <h1 className="text-lg mb-10">
             Already have an account?
-            <a href="/Login" className="cursor-pointer text-[#0090CE]">
+            <Link to="/Login" className="cursor-pointer text-[#0090CE]">
               &nbsp;Log In
-            </a>
+            </Link>
           </h1>
         </div>
       </div>
