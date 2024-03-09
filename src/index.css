@@ -1,0 +1,9 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-image: url('./assets/Background.jpg'); /* Example background image */
+  background-size: cover; /* Cover the entire background */
+}
