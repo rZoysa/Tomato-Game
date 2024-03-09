@@ -21,11 +21,37 @@ const Login = () => {
       );
       const user = userCredential.user;
       console.log("User logged in:", user.uid);
+
+      // Set user session after successful login
+      setUserSession(user.uid);
+
       // Here you can navigate to the home page or perform any other action upon successful login
       navigate("/home");
     } catch (error) {
-      setError(error.message); // Display error message
+      // Handle specific login errors and provide meaningful messages
+      switch (error.code) {
+        case "auth/invalid-email":
+          setError("Invalid email address.");
+          break;
+        case "auth/user-disabled":
+          setError("Your account has been disabled.");
+          break;
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+        case "auth/invalid-credential":
+          setError("Invalid email or password.");
+          break;
+        default:
+          setError("An error occurred during login. Please try again later.");
+          break;
+      }
     }
+  };
+
+  // Function to set user session
+  const setUserSession = (userId) => {
+    // You can use local storage to store user session
+    localStorage.setItem("userId", userId);
   };
 
   return (
