@@ -25,7 +25,7 @@ const Landing_Page = () => {
               <img src="" alt="" srcSet="Vector.png" />
             </div>
             <br />
-            <h1 className="text-3xl mb-10">Ready to play!</h1>
+            <h1 className="text-4xl mb-10 font-itim">Ready to play!</h1>
 
             <div className="flex flex-col items-center w-full">
               <div className="mb-5 w-full flex items-center justify-center space-x-10">

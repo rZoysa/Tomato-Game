@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,4 +7,8 @@
 body {
   background-image: url('./assets/Background.jpg'); /* Example background image */
   background-size: cover; /* Cover the entire background */
+}
+
+.font-itim {
+  font-family: 'Itim', sans-serif;
 }
