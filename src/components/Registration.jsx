@@ -40,8 +40,10 @@ const Registration = () => {
         email: email,
       });
 
-      console.log("User registered:", user.uid);
+    //   console.log("User registered:", user.uid);
+
       navigate("/home");
+      
     } catch (error) {
       // Handle specific registration errors and provide meaningful messages
       switch (error.code) {
