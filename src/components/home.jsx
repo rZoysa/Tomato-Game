@@ -24,12 +24,12 @@ const Home = () => {
         <div className="flex justify-between items-center ">
           <div className="ml-10 m-24 inline-flex justify-center items-center">
             <Link to="/Home">
-            <img
-              src=""
-              alt=""
-              srcSet="home.png"
-              className="pr-1 w-16 cursor-pointer"
-            />
+              <img
+                src=""
+                alt=""
+                srcSet="home.png"
+                className="pr-1 w-16 cursor-pointer"
+              />
             </Link>
             <h1 className="text-6xl font-bold">Tomato Quiz Game</h1>
           </div>
@@ -114,18 +114,23 @@ const Home = () => {
           </Menu>
         </div>
 
-        <div className="flex items-center w-fit">
-          <ul className="list-disc text-6xl font-itim font-bold text-white ml-10 inline-block">
-            <li className="transition-all hover:text-7xl m-7 w-fit">
-              <Link to="/difficulty">Play</Link>
-            </li>
-            <li className="transition-all hover:text-7xl m-7 w-fit">
-              <Link to="/leaderboard">Leaderboard</Link>
-            </li>
-            <li className="transition-all hover:text-7xl m-7 w-fit">
-              <Link to="/instructions">Instructions</Link>
-            </li>
-          </ul>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <ul className="list-disc text-6xl font-itim font-bold text-white ml-10 inline-block">
+              <li className="transition-all hover:text-7xl m-7 w-fit">
+                <Link to="/difficulty">Play</Link>
+              </li>
+              <li className="transition-all hover:text-7xl m-7 w-fit">
+                <Link to="/leaderboard">Leaderboard</Link>
+              </li>
+              <li className="transition-all hover:text-7xl m-7 w-fit">
+                <Link to="/instructions">Instructions</Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <img src="" alt="" srcSet="bg-icon.png" className="m-10 w-fit" />
+          </div>
         </div>
       </div>
     </div>
