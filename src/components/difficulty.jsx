@@ -1,9 +1,19 @@
+import { Link } from "react-router-dom";
+
 function Difficulty() {
   return (
     <div>
       <div className="flex justify-center items-center h-screen">
         <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6">
           <div className=" flex ml-10 m-24 w-fit">
+          <Link to="/Home">
+            <img
+              src=""
+              alt=""
+              srcSet="home.png"
+              className="pr-1 w-16 cursor-pointer"
+            />
+            </Link>
             <h1 className="text-6xl font-bold ">Choose a Difficulty</h1>
           </div>
           <div className="flex items-center w-fit">
