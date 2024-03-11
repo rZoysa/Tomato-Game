@@ -96,6 +96,11 @@ const Registration = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6 flex justify-center items-center">
+        <div className="absolute top-28 left-28 mt-4 ml-4">
+          <Link to="/">
+            <img src="back.png" alt="" />
+          </Link>
+        </div>
         <div className="bg-white w-4/12 text-center rounded-3xl">
           <img
             src=""
