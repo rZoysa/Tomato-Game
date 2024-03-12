@@ -4,6 +4,7 @@ import Login from "./components/login";
 import Home from './components/home';
 import Registration from './components/Registration';
 import Difficulty from './components/difficulty';
+import Easy_mode from './components/easy_mode';
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path='/Registration' element={<Registration/>}></Route>
         <Route path="/home" element={<Home />} />
-        <Route path='/Difficulty' element={<Difficulty/>}></Route>        
+        <Route path='/Difficulty' element={<Difficulty/>}></Route>  
+        <Route path='/Easy_mode' element={<Easy_mode/>}></Route>      
       </Routes>
     </Router>
   );

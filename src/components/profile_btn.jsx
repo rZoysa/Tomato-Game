@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Profile_btn() {
   const navigate = useNavigate();
@@ -22,23 +23,35 @@ function Profile_btn() {
   return (
     <div className="flex justify-between items-center ">
       <div className="ml-10 m-24 inline-flex justify-center items-center">
+      <motion.div
+          className="box"
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
         <Link to="/Home">
           <img
             src=""
             alt=""
             srcSet="home.png"
-            className="pr-1 w-16 cursor-pointer mr-10 hover:scale-110"
+            className="pr-1 w-16 cursor-pointer mr-10 select-none"
           />
         </Link>
+        </motion.div>
         <h1 className="text-6xl font-bold select-none">Tomato Quiz Game</h1>
       </div>
       <Menu as="div" className="w-fit mr-28 flex-col ">
-        <Menu.Button className="cursor-pointer w-fit hover:scale-105 bg-white inline-flex justify-center items-center rounded-full p-2 shadow-lg">
-          <p className="text-3xl font-itim select-none font-bold p-1">
-            {userName}
-          </p>
-          <img src="" alt="" srcSet="profile.png" className="pr-1" />
-        </Menu.Button>
+        <motion.div
+          className="box"
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <Menu.Button className="cursor-pointer w-fit bg-white inline-flex justify-center items-center rounded-full p-2 shadow-lg">
+            <p className="text-3xl font-itim select-none font-bold p-1">
+              {userName}
+            </p>
+            <img src="" alt="" srcSet="profile.png" className="pr-1 select-none" />
+          </Menu.Button>
+        </motion.div>
         <Transition
           as={Fragment}
           enter="transition ease-out duration-200"
