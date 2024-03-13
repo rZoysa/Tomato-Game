@@ -26,7 +26,8 @@ function Profile_btn() {
       <motion.div
           className="box"
           whileHover={{ scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
         <Link to="/Home">
           <img
@@ -43,7 +44,8 @@ function Profile_btn() {
         <motion.div
           className="box"
           whileHover={{ scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          whileTap={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           <Menu.Button className="cursor-pointer w-fit bg-white inline-flex justify-center items-center rounded-full p-2 shadow-lg">
             <p className="text-3xl font-itim select-none font-bold p-1">
