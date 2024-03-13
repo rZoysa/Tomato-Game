@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Profile_btn } from "./profile_btn";
 import { Game_summary } from "./game_summary";
+import { motion } from "framer-motion";
 
 function Easy_mode() {
   const [imageUrl, setImageUrl] = useState("");
@@ -49,7 +50,7 @@ function Easy_mode() {
       setLivesCount(livesCount - 1);
       console.log(livesCount);
       if (livesCount === 1) {
-        openSummary(score);       
+        openSummary(score);
       }
     }
     fetchData();
@@ -68,19 +69,25 @@ function Easy_mode() {
     if (confirmed) {
       handleRestart();
     }
-  }
+  };
 
   const handleRestart = () => {
-      setFeedback("");
-      setScore(0);
-      setLivesCount(5);
-      fetchData();
+    setFeedback("");
+    setScore(0);
+    setLivesCount(5);
+    fetchData();
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
       <button onClick={openSummary}>show summary</button>
-      {isSummaryOpen && <Game_summary onClose={closeSummary} score={score} restartGame={handleRestart}/>}
+      {isSummaryOpen && (
+        <Game_summary
+          onClose={closeSummary}
+          score={score}
+          restartGame={handleRestart}
+        />
+      )}
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6 ">
         <Profile_btn />
         <div className="flex justify-center items-center">
@@ -117,13 +124,23 @@ function Easy_mode() {
 
             <div className="flex items-center justify-between">
               {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
+                <motion.div
+                key={number}
+                className="box"
+                whileHover={!isSummaryOpen ? { scale: 1.2 } : {}}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <button
-                  key={number}
+                  
                   onClick={() => handleButtonClick(number)}
-                  className="w-11 h-11 bg-[#D62E2E] text-white rounded-xl font-itim font-bold text-4xl hover:scale-125 transition-all"
+                  disabled={isSummaryOpen}
+                  className="w-11 h-11 bg-[#D62E2E] text-white rounded-xl font-itim font-bold text-4xl transition-all"
                 >
+                  
                   {number}
+                 
                 </button>
+                </motion.div>
               ))}
             </div>
             <div className="flex justify-center">
