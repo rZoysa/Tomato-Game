@@ -80,7 +80,6 @@ function Easy_mode() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <button onClick={openSummary}>show summary</button>
       {isSummaryOpen && (
         <Game_summary
           onClose={closeSummary}
