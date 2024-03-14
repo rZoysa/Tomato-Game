@@ -150,11 +150,11 @@ function Easy_mode() {
 
         <div className="flex justify-center items-center">
           <div className="flex-col justify-center items-center w-fit">
-            <p className="font-bold text-4xl font-itim text-white text-center mb-1">
+            <p className="font-bold text-4xl font-itim text-white text-center mb-1 select-none">
               Score: {score}
             </p>
             <div className="inline-flex justify-between w-full">
-              <div className="inline-flex justify-center items-center">
+              <div className="inline-flex justify-center items-center select-none">
                 <p className="mr-2 font-bold text-4xl font-itim text-white">
                   Lives:{" "}
                 </p>
@@ -181,13 +181,13 @@ function Easy_mode() {
                     : "transition-opacity duration-500"
                 } ${
                   feedback === "Correct!" ? "text-green-500" : "text-red-600"
-                } font-itim text-3xl`}
+                } font-itim text-3xl select-none`}
                 style={{ opacity: feedback ? 1 : 0 }}
               >
                 {feedback}
               </p>
 
-              <div className="inline-flex items-center font-itim">
+              <div className="inline-flex items-center font-itim select-none">
                 <p className="text-white font-bold font-itim text-4xl">
                   Timer:
                 </p>
