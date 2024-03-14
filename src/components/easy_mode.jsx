@@ -202,7 +202,9 @@ function Easy_mode() {
                     cx="50"
                     cy="50"
                     r="20"
-                    className="stroke-current text-white"
+                    className={`${
+                      timer > 3 ? "text-white" : "text-red-600"
+                    } stroke-current `}
                     strokeDasharray={2 * Math.PI * 20} // Circumference of the circle with the new radius
                     strokeDashoffset={2 * Math.PI * 20 * (1 - progress)} // Adjusted strokeDashoffset for the new radius
                     fill="none"
