@@ -71,7 +71,7 @@ function Easy_mode() {
         fetchData();
         setTimer(questionTime);
         startTimer();
-        setFeedback("Wrong!");
+        setFeedback("Times Up!");
       }
     }
   }, [timer, livesCount, score]);
@@ -132,6 +132,9 @@ function Easy_mode() {
         <Profile_btn />
         <div className="flex justify-center items-center">
           <div className="flex-col justify-center items-center w-fit">
+            <p className="font-bold text-4xl font-itim text-white text-center mb-1">
+              Score: {score}
+            </p>
             <div className="inline-flex justify-between w-full">
               <div className="inline-flex justify-center items-center">
                 <p className="mr-2 font-bold text-4xl font-itim text-white">
@@ -153,11 +156,9 @@ function Easy_mode() {
                   )
                 )}
               </div>
-              <p>{feedback}</p>
-              <p className="font-bold text-4xl font-itim text-white">
-                Score: {score}
-              </p>
-              <p className="absolute top-0 right-0 text-white m-4 font-bold">
+              <p className={`${feedback === "Correct!" ? 'text-green-500' : 'text-red-600'} font-itim text-3xl`}>{feedback}</p>
+
+              <p className="top-0 right-0 text-white m-4 font-bold">
                 Timer: {timer}
               </p>
             </div>

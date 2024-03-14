@@ -22,7 +22,7 @@ function Profile_btn() {
 
   return (
     <div className="flex justify-between items-center ">
-      <div className="ml-10 m-20 inline-flex justify-center items-center">
+      <div className="ml-10 m-14 inline-flex justify-center items-center">
       <motion.div
           className="box"
           whileHover={{ scale: 1.1 }}

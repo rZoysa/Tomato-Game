@@ -8,7 +8,7 @@ const Home = () => {
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6">
         <Profile_btn />
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center mt-14">
           <div className="flex items-center justify-between w-11/12">
             <div className="flex items-center">
               <ul className="list-disc text-6xl font-itim font-bold text-white ml-10 inline-block select-none">
