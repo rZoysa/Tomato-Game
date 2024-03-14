@@ -15,6 +15,8 @@ function Easy_mode() {
   const [intervalId, setIntervalId] = useState(null);
   const questionTime = 10;
 
+  const [progress, setProgress] = useState(1); // Initial progress value
+
   useEffect(() => {
     fetchData();
     startTimer();
@@ -95,6 +97,21 @@ function Easy_mode() {
     }
   };
 
+  // Clear feedback
+  useEffect(() => {
+    if (feedback !== "") {
+      const timeoutId = setTimeout(() => {
+        setFeedback("");
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [feedback]);
+
+  useEffect(() => {
+    const newProgress = timer / 10; // Assuming the timer starts from 60 seconds
+    setProgress(newProgress);
+  }, [timer]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -130,6 +147,7 @@ function Easy_mode() {
       )}
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6 ">
         <Profile_btn />
+
         <div className="flex justify-center items-center">
           <div className="flex-col justify-center items-center w-fit">
             <p className="font-bold text-4xl font-itim text-white text-center mb-1">
@@ -156,11 +174,57 @@ function Easy_mode() {
                   )
                 )}
               </div>
-              <p className={`${feedback === "Correct!" ? 'text-green-500' : 'text-red-600'} font-itim text-3xl`}>{feedback}</p>
-
-              <p className="top-0 right-0 text-white m-4 font-bold">
-                Timer: {timer}
+              <p
+                className={`${
+                  feedback === ""
+                    ? "transition-opacity duration-500"
+                    : "transition-opacity duration-500"
+                } ${
+                  feedback === "Correct!" ? "text-green-500" : "text-red-600"
+                } font-itim text-3xl`}
+                style={{ opacity: feedback ? 1 : 0 }}
+              >
+                {feedback}
               </p>
+
+              <div className="inline-flex items-center font-itim">
+                <p className="text-white font-bold font-itim text-4xl">
+                  Timer:
+                </p>
+                <svg
+                  id="progress"
+                  width="75"
+                  height="55"
+                  viewBox="10 20 75 55"
+                  className="top-4 left-4"
+                >
+                  <motion.circle
+                    cx="50"
+                    cy="50"
+                    r="20"
+                    className="stroke-current text-white"
+                    strokeDasharray={2 * Math.PI * 20} // Circumference of the circle with the new radius
+                    strokeDashoffset={2 * Math.PI * 20 * (1 - progress)} // Adjusted strokeDashoffset for the new radius
+                    fill="none"
+                    strokeWidth="8" // Adjust the stroke width here
+                    transform="rotate(-90 50 50)" // Rotate the circle by -90 degrees around the center (50, 50) to start from the top
+                    animate={{
+                      strokeDashoffset: 2 * Math.PI * 20 * (1 - progress),
+                    }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                  />
+
+                  <text
+                    x="50"
+                    y="50"
+                    dominantBaseline="middle"
+                    textAnchor="middle"
+                    className="text-white font-bold text-2xl fill-current"
+                  >
+                    {timer}
+                  </text>
+                </svg>
+              </div>
             </div>
 
             <div>
