@@ -11,6 +11,30 @@ function Easy_mode() {
   const [score, setScore] = useState(0);
   const [livesCount, setLivesCount] = useState(5);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
+  const [timer, setTimer] = useState(10); // Timer set to 10 seconds
+  const [intervalId, setIntervalId] = useState(null);
+  const questionTime = 10;
+
+  useEffect(() => {
+    fetchData();
+    startTimer();
+  }, []); // Fetch data and start timer on component mount
+
+  const startTimer = () => {
+    const id = setInterval(() => {
+      setTimer((prevTimer) => {
+        if (prevTimer === 1) {
+          clearInterval(id); // Stop the timer when it reaches 0
+        }
+        return prevTimer - 1;
+      });
+    }, 1000);
+    setIntervalId(id); // Store the interval ID
+  };
+
+  const stopTimer = () => {
+    clearInterval(intervalId); // Stop the timer using the stored interval ID
+  };
 
   const openSummary = () => {
     setIsSummaryOpen(true);
@@ -18,10 +42,6 @@ function Easy_mode() {
   const closeSummary = () => {
     setIsSummaryOpen(false);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []); // Fetch data on component mount
 
   const fetchData = async () => {
     try {
@@ -34,26 +54,45 @@ function Easy_mode() {
       const data = await response.json();
       setImageUrl(data.question);
       setSolution(data.solution);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // Check if timer reaches 0
+    if (timer === 0) {
+      if (livesCount === 1) {
+        stopTimer();
+        openSummary(score);
+      } else {
+        setLivesCount(livesCount - 1);
+        fetchData();
+        setTimer(questionTime);
+        startTimer();
+        setFeedback("Wrong!");
+      }
+    }
+  }, [timer, livesCount, score]);
 
   const handleButtonClick = (number) => {
     if (number === solution) {
       setFeedback("Correct!");
       setScore(score + 1);
+      setTimer(questionTime);
+      fetchData();
     } else {
       setFeedback("Wrong!");
-      setLivesCount(livesCount - 1);
-      console.log(livesCount);
       if (livesCount === 1) {
         openSummary(score);
+        stopTimer();
+      } else {
+        setLivesCount(livesCount - 1);
+        setTimer(questionTime);
+        fetchData();
       }
     }
-    fetchData();
   };
 
   if (loading) {
@@ -76,6 +115,8 @@ function Easy_mode() {
     setScore(0);
     setLivesCount(5);
     fetchData();
+    setTimer(questionTime);
+    startTimer();
   };
 
   return (
@@ -113,7 +154,12 @@ function Easy_mode() {
                 )}
               </div>
               <p>{feedback}</p>
-              <p>Score: {score}</p>
+              <p className="font-bold text-4xl font-itim text-white">
+                Score: {score}
+              </p>
+              <p className="absolute top-0 right-0 text-white m-4 font-bold">
+                Timer: {timer}
+              </p>
             </div>
 
             <div>
@@ -124,21 +170,18 @@ function Easy_mode() {
             <div className="flex items-center justify-between">
               {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
                 <motion.div
-                key={number}
-                className="box"
-                whileHover={!isSummaryOpen ? { scale: 1.2 } : {}}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <button
-                  
-                  onClick={() => handleButtonClick(number)}
-                  disabled={isSummaryOpen}
-                  className="w-11 h-11 bg-[#D62E2E] text-white rounded-xl font-itim font-bold text-4xl transition-all"
+                  key={number}
+                  className="box"
+                  whileHover={!isSummaryOpen ? { scale: 1.2 } : {}}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  
-                  {number}
-                 
-                </button>
+                  <button
+                    onClick={() => handleButtonClick(number)}
+                    disabled={isSummaryOpen}
+                    className="w-11 h-11 bg-[#D62E2E] text-white rounded-xl font-itim font-bold text-4xl transition-all"
+                  >
+                    {number}
+                  </button>
                 </motion.div>
               ))}
             </div>
