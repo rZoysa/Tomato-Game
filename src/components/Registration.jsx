@@ -39,6 +39,9 @@ const Registration = () => {
       await set(child(dbRef, `users/${uid}`), {
         username: username,
         email: email,
+        easy: 0,
+        medium: 0,
+        hard: 0,
       });
 
       //   console.log("User registered:", user.uid);
