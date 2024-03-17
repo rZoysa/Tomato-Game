@@ -9,6 +9,7 @@ function Game_summary({ restartGame, onClose, score, difficulty }) {
   const userId = localStorage.getItem("userId");
   const [userData, setUserData] = useState(null);
   const [isNewHighScore, setIsNewHighScore] = useState(false);
+  const [isUserLogged, setIIsUserLogged] = useState(false);
   const dbRef = ref(getDatabase(app));
 
   const playAgain = () => {
@@ -18,6 +19,10 @@ function Game_summary({ restartGame, onClose, score, difficulty }) {
 
   useEffect(() => {
     fetchUserData();
+
+    if (userId) {
+      setIIsUserLogged(true);
+    }
   }, []);
 
   const fetchUserData = async () => {
@@ -51,21 +56,21 @@ function Game_summary({ restartGame, onClose, score, difficulty }) {
   useEffect(() => {
     if (userData !== null) {
       let difficultyValue;
-    switch (difficulty) {
-      case "easy":
-        difficultyValue = userData.easy;
-        break;
-      case "medium":
-        difficultyValue = userData.medium;
-        break;
-      case "hard":
-        difficultyValue = userData.hard;
-        break;
-    }
+      switch (difficulty) {
+        case "easy":
+          difficultyValue = userData.easy;
+          break;
+        case "medium":
+          difficultyValue = userData.medium;
+          break;
+        case "hard":
+          difficultyValue = userData.hard;
+          break;
+      }
 
-    if (difficultyValue < score) {
-      updateHighScore();
-    }
+      if (difficultyValue < score) {
+        updateHighScore();
+      }
     }
   }, [userData]);
 
@@ -87,6 +92,12 @@ function Game_summary({ restartGame, onClose, score, difficulty }) {
           {isNewHighScore && (
             <p className="text-xl text-green-600 font-bold mt-2">
               Congratulations! New high score.
+            </p>
+          )}
+
+          {!isUserLogged && (
+            <p className="text-xl text-black-600 font-bold mt-2">
+              Login to Save your Score!
             </p>
           )}
         </div>
