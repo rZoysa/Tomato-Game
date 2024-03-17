@@ -5,6 +5,7 @@ import Home from './components/home';
 import Registration from './components/Registration';
 import Difficulty from './components/difficulty';
 import GameController from './components/gameController';
+import Leaderboard from './components/leaderboard';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path='/Difficulty' element={<Difficulty/>}/>  
         <Route path='/GameController/:difficulty' element={<GameController/>}/>    
+        <Route path='/leaderboard' element={<Leaderboard/>}></Route>
       </Routes>
     </Router>
   );
