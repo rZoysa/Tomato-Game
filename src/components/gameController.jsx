@@ -8,14 +8,17 @@ function GameController() {
   const { difficulty } = useParams();
   const initialTimer =
     difficulty === "easy" ? 30 : difficulty === "medium" ? 20 : 15;
+
   const initialLivesCount =
     difficulty === "easy" ? 5 : difficulty === "medium" ? 3 : 3;
+
   const initialLivesImg =
     difficulty === "easy"
       ? "/easy.png"
       : difficulty === "medium"
       ? "/mid.png"
       : "/hard.png";
+
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [solution, setSolution] = useState("");
@@ -172,6 +175,7 @@ function GameController() {
           onClose={closeSummary}
           score={score}
           restartGame={handleRestart}
+          difficulty={difficulty}
         />
       )}
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6 ">
