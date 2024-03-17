@@ -134,7 +134,7 @@ function GameController () {
   const handleRestart = () => {
     setFeedback("");
     setScore(0);
-    setLivesCount(5);
+    setLivesCount(initialLivesCount);
     fetchData();
     setTimer(questionTime);
     startTimer();
