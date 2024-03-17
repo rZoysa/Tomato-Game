@@ -33,7 +33,7 @@ function Profile_btn() {
           <img
             src=""
             alt=""
-            srcSet="home.png"
+            srcSet="/home.png"
             className="pr-1 w-16 cursor-pointer mr-10 select-none"
           />
         </Link>
@@ -48,10 +48,11 @@ function Profile_btn() {
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           <Menu.Button className="cursor-pointer w-fit bg-white inline-flex justify-center items-center rounded-full p-2 shadow-lg">
+          <img src="" alt="" srcSet="/profile.png" className="pr-1 select-none" />
             <p className="text-3xl font-itim select-none font-bold p-1">
               {userName}
             </p>
-            <img src="" alt="" srcSet="profile.png" className="pr-1 select-none" />
+            
           </Menu.Button>
         </motion.div>
         <Transition

@@ -4,11 +4,18 @@ import { Game_summary } from "./game_summary";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 
-function GameController () {
+function GameController() {
   const { difficulty } = useParams();
-  const initialTimer = difficulty === "easy" ? 30 : difficulty === "medium" ? 20 : 15;
-  const initialLivesCount = difficulty === "easy" ? 5 : difficulty === "medium" ? 3 : 3;
-  const initialLivesImg = difficulty === "easy" ? "/easy.png" : difficulty === "medium" ? "/mid.png" : "/hard.png";
+  const initialTimer =
+    difficulty === "easy" ? 30 : difficulty === "medium" ? 20 : 15;
+  const initialLivesCount =
+    difficulty === "easy" ? 5 : difficulty === "medium" ? 3 : 3;
+  const initialLivesImg =
+    difficulty === "easy"
+      ? "/easy.png"
+      : difficulty === "medium"
+      ? "/mid.png"
+      : "/hard.png";
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [solution, setSolution] = useState("");
@@ -16,15 +23,26 @@ function GameController () {
   const [score, setScore] = useState(0);
   const [livesCount, setLivesCount] = useState(initialLivesCount);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
-  const [timer, setTimer] = useState(initialTimer); // Timer set to 10 seconds
+  const [timer, setTimer] = useState(initialTimer);
   const [intervalId, setIntervalId] = useState(null);
   const questionTime = initialTimer;
-  const [progress, setProgress] = useState(1); // Initial progress value
+  const [progress, setProgress] = useState(1);
+  const [numbers, setNumbers] = useState([...Array(10).keys()]);
 
   useEffect(() => {
     fetchData();
     startTimer();
   }, []); // Fetch data and start timer on component mount
+
+  useEffect(() => {
+    if (difficulty === "hard") {
+      shuffleNumbers();
+    }
+  }, [solution, difficulty]);
+
+  const shuffleNumbers = () => {
+    setNumbers(numbers.sort(() => Math.random() - 0.5));
+  };
 
   const startTimer = () => {
     const id = setInterval(() => {
@@ -117,7 +135,14 @@ function GameController () {
   }, [timer]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="text-5xl h-screen place-content-center flex justify-center items-center">
+        <p className="spinner border-4 border-t-4 border-gray-400 h-12 w-12 rounded-full animate-spin">
+          -
+        </p>
+        <p className="text-white border-black p-4">Loading...</p>
+      </div>
+    );
   }
 
   if (!imageUrl) {
@@ -162,21 +187,16 @@ function GameController () {
                 <p className="mr-2 font-bold text-4xl font-itim text-white">
                   Lives:{" "}
                 </p>
-                {[...Array(livesCount)].map(
-                  (
-                    _,
-                    index // Loop to render the image multiple times
-                  ) => (
-                    <img
-                      key={index}
-                      src={initialLivesImg}
-                      className={`w-8 h-8 mr-2 transition-opacity duration-500 ${
-                        index < livesCount ? "opacity-100" : "opacity-0"
-                      }`}
-                      alt=""
-                    />
-                  )
-                )}
+                {[...Array(livesCount)].map((_, index) => (
+                  <img
+                    key={index}
+                    src={initialLivesImg}
+                    className={`w-8 h-8 mr-2 transition-opacity duration-500 ${
+                      index < livesCount ? "opacity-100" : "opacity-0"
+                    }`}
+                    alt=""
+                  />
+                ))}
               </div>
               <p
                 className={`${
@@ -209,11 +229,11 @@ function GameController () {
                     className={`${
                       timer > 3 ? "text-white" : "text-red-600"
                     } stroke-current `}
-                    strokeDasharray={2 * Math.PI * 20} // Circumference of the circle with the new radius
-                    strokeDashoffset={2 * Math.PI * 20 * (1 - progress)} // Adjusted strokeDashoffset for the new radius
+                    strokeDasharray={2 * Math.PI * 20} //Circumference of the circle
+                    strokeDashoffset={2 * Math.PI * 20 * (1 - progress)}
                     fill="none"
-                    strokeWidth="8" // Adjust the stroke width here
-                    transform="rotate(-90 50 50)" // Rotate the circle by -90 degrees around the center (50, 50) to start from the top
+                    strokeWidth="8"
+                    transform="rotate(-90 50 50)"
                     animate={{
                       strokeDashoffset: 2 * Math.PI * 20 * (1 - progress),
                     }}
@@ -239,7 +259,7 @@ function GameController () {
             <p>Solution: {solution}</p>
 
             <div className="flex items-center justify-between">
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
+              {numbers.map((number) => (
                 <motion.div
                   key={number}
                   className="box"
