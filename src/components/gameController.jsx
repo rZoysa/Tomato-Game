@@ -2,19 +2,23 @@ import { useState, useEffect } from "react";
 import { Profile_btn } from "./profile_btn";
 import { Game_summary } from "./game_summary";
 import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
 
-function Easy_mode() {
+function GameController () {
+  const { difficulty } = useParams();
+  const initialTimer = difficulty === "easy" ? 30 : difficulty === "medium" ? 20 : 15;
+  const initialLivesCount = difficulty === "easy" ? 5 : difficulty === "medium" ? 3 : 3;
+  const initialLivesImg = difficulty === "easy" ? "/easy.png" : difficulty === "medium" ? "/mid.png" : "/hard.png";
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [solution, setSolution] = useState("");
   const [feedback, setFeedback] = useState("");
   const [score, setScore] = useState(0);
-  const [livesCount, setLivesCount] = useState(5);
+  const [livesCount, setLivesCount] = useState(initialLivesCount);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
-  const [timer, setTimer] = useState(10); // Timer set to 10 seconds
+  const [timer, setTimer] = useState(initialTimer); // Timer set to 10 seconds
   const [intervalId, setIntervalId] = useState(null);
-  const questionTime = 10;
-
+  const questionTime = initialTimer;
   const [progress, setProgress] = useState(1); // Initial progress value
 
   useEffect(() => {
@@ -108,7 +112,7 @@ function Easy_mode() {
   }, [feedback]);
 
   useEffect(() => {
-    const newProgress = timer / 10; // Assuming the timer starts from 60 seconds
+    const newProgress = timer / initialTimer; // Assuming the timer starts from 60 seconds
     setProgress(newProgress);
   }, [timer]);
 
@@ -165,7 +169,7 @@ function Easy_mode() {
                   ) => (
                     <img
                       key={index}
-                      src="easy.png"
+                      src={initialLivesImg}
                       className={`w-8 h-8 mr-2 transition-opacity duration-500 ${
                         index < livesCount ? "opacity-100" : "opacity-0"
                       }`}
@@ -267,4 +271,4 @@ function Easy_mode() {
   );
 }
 
-export default Easy_mode;
+export default GameController;

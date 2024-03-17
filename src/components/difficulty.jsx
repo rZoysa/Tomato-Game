@@ -24,7 +24,7 @@ function Difficulty() {
                     alt="Bullet Point Image"
                     className="w-10 h-10 mr-2"
                   />
-                  <Link to="/Easy_mode">Certified Cherry</Link>
+                  <Link to="/gameController/easy">Certified Cherry</Link>
                   </motion.div>
                 </li>
                 <li className="flex items-center transition-all hover:scale-125 m-7 w-fit">
@@ -38,7 +38,7 @@ function Difficulty() {
                     alt="Bullet Point Image"
                     className="w-12 h-10 mr-2"
                   />
-                  <Link to="/leaderboard">Getting There</Link>
+                  <Link to="/gameController/medium">Getting There</Link>
                   </motion.div>
                 </li>
                 <li className="flex items-center transition-all hover:scale-125 m-7 w-fit">
@@ -52,7 +52,7 @@ function Difficulty() {
                     alt="Bullet Point Image"
                     className="w-10 h-10 mr-2"
                   />
-                  <Link to="/instructions">Tomato Crusher</Link>
+                  <Link to="/gameController/hard">Tomato Crusher</Link>
                   </motion.div>
                 </li>
               </ul>

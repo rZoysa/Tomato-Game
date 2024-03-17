@@ -4,7 +4,7 @@ import Login from "./components/login";
 import Home from './components/home';
 import Registration from './components/Registration';
 import Difficulty from './components/difficulty';
-import Easy_mode from './components/easy_mode';
+import GameController from './components/gameController';
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Route path='/Registration' element={<Registration/>}/>
         <Route path="/home" element={<Home />} />
         <Route path='/Difficulty' element={<Difficulty/>}/>  
-        <Route path='/Easy_mode' element={<Easy_mode/>}/>    
+        <Route path='/GameController/:difficulty' element={<GameController/>}/>    
       </Routes>
     </Router>
   );
