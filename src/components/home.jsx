@@ -32,7 +32,7 @@ const Home = () => {
                   <Link to="/leaderboard">Leaderboard</Link>
                   </motion.div>
                 </li>
-                <li className="transition-all hover:scale-125 m-7 w-fit">
+                {/* <li className="transition-all hover:scale-125 m-7 w-fit">
                 <motion.div
                   className="box"
                   whileHover={{ scale: 1.1 }}
@@ -40,7 +40,7 @@ const Home = () => {
                 >
                   <Link to="/instructions">Instructions</Link>
                   </motion.div>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div>
