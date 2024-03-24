@@ -13,7 +13,7 @@ function Difficulty() {
             <p className="text-6xl font-itim font-bold text-white m-5 select-none">Choose a Diffuculty</p>
             <div className="flex items-center w-fit">
               <ul className="list-none text-6xl font-itim font-bold text-white ml-10 inline-block">
-                <li className="flex items-center transition-all hover:scale-110 m-7 w-fit">
+                <li className="flex items-center transition-all hover:scale-125 m-7 w-fit">
                 <motion.div
                   className="inline-flex items-center"
                   whileHover={{ scale: 1.05 }}
