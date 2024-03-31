@@ -34,7 +34,7 @@ const Login = () => {
         setUserSession(user.uid, userData.username);
       }
 
-      navigate("/home");
+      navigate("/home", {replace : true});
     } catch (error) {
       switch (error.code) {
         case "auth/invalid-email":
