@@ -46,7 +46,7 @@ const Registration = () => {
 
       //   console.log("User registered:", user.uid);
       setUserSession(uid, username);
-      navigate("/home");
+      navigate("/home", {replace : true});
     } catch (error) {
       // Handle specific registration errors and provide meaningful messages
       switch (error.code) {
