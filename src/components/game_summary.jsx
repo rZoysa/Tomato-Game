@@ -75,7 +75,7 @@ function Game_summary({ restartGame, onClose, score, difficulty }) {
   }, [userData]);
 
   return (
-    <div className="bg-black fixed flex justify-center items-center w-screen h-screen bg-opacity-45 select-none">
+    <div className="bg-black fixed flex justify-center items-center w-screen h-screen bg-opacity-45 select-none z-50">
       <motion.div
         className="bg-white p-8 rounded-lg shadow-lg z-50 w-2/5 h-3/5"
         initial={{ opacity: 0, scale: 0.5 }}
