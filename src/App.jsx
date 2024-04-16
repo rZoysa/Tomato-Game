@@ -7,6 +7,7 @@ import Difficulty from './components/difficulty';
 import GameController from './components/gameController';
 import Leaderboard from './components/leaderboard';
 import Time from './components/time';
+import Instructions from './components/instructions';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path='/Difficulty' element={<Difficulty/>}/>  
         <Route path='/GameController/:difficulty' element={<GameController/>}/>    
         <Route path='/leaderboard' element={<Leaderboard/>}></Route>
+        <Route path='/instructions' element={<Instructions/>}></Route>
       </Routes>
       
         <Time/>
