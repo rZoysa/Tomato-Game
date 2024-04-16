@@ -22,7 +22,7 @@ function instructions() {
                   <h1>Certified Cherry: You have 5 lives and 30 seconds per question.</h1>
                 </li>
                 <li>
-                  <h1>Getting There: You have 5 lives and 20 seconds per question.</h1>
+                  <h1>Getting There: You have 3 lives and 20 seconds per question.</h1>
                 </li>
                 <li>
                   <h1>Tomato Crusher: You have 3 lives and 15 seconds per question.</h1>
