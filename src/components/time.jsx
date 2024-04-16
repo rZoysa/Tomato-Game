@@ -7,18 +7,10 @@ const Time = () => {
   
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            // Fetching country information using fetch
-            const ipResponse = await fetch("https://ipapi.co/8.8.8.8/json/");
-            const ipData = await ipResponse.json();
-    
-            // Fetching timezone information using fetch
-            const timezoneResponse = await fetch(`http://worldtimeapi.org/api/timezone/${ipData.timezone}`);
-            const timezoneData = await timezoneResponse.json();
-    
+          try {       
             // Function to fetch and update time
             const updateTime = async () => {
-              const timeResponse = await fetch(`http://worldtimeapi.org/api/timezone/${timezoneData.timezone}`);
+              const timeResponse = await fetch(`https://worldtimeapi.org/api/ip`);
               const timeData = await timeResponse.json();
               setTime(timeData.datetime);
             };
