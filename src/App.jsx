@@ -6,6 +6,7 @@ import Registration from './components/Registration';
 import Difficulty from './components/difficulty';
 import GameController from './components/gameController';
 import Leaderboard from './components/leaderboard';
+import Time from './components/time';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Landing_Page/>}/>
+        <Route path='/gg' element={<Time/>}/>
         <Route path="/login" element={<Login />} />
         <Route path='/Registration' element={<Registration/>}/>
         <Route path="/home" element={<Home />} />
@@ -22,6 +24,9 @@ function App() {
         <Route path='/GameController/:difficulty' element={<GameController/>}/>    
         <Route path='/leaderboard' element={<Leaderboard/>}></Route>
       </Routes>
+      
+        <Time/>
+      
     </Router>
   );
 }

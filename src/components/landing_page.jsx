@@ -49,10 +49,18 @@ const Landing_Page = () => {
                     transition={{ delay: index * 0.1 }} // Delay each letter animation
                   >
                     {letter}
+
                   </motion.span>
                 ))}
               </p>
-              <img src="" alt="" srcSet="Vector.png" className="select-none" />
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: text.length * 0.1 + 0.3 }} // Delay after text animation
+              >
+                <img src="" alt="" srcSet="Vector.png" className="select-none" />
+              </motion.span>
+              
             </div>
 
             <br />
