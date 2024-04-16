@@ -9,6 +9,7 @@ import {
   get,
 } from "firebase/database";
 import { Profile_btn } from "./profile_btn";
+import { Tab } from "@headlessui/react";
 
 function Leaderboard() {
   const [difficulty, setDifficulty] = useState("easy");
@@ -16,6 +17,12 @@ function Leaderboard() {
   const currentUserName = localStorage.getItem("userName");
 
   const dbRef = getDatabase(app);
+
+  const tabs = [
+    { label: "Certified Cherry", value: "easy" },
+    { label: "Getting There", value: "medium" },
+    { label: "Tomato Crusher", value: "hard" },
+  ];
 
   const fetchLeaderboardData = async () => {
     const difficultyRef = query(
@@ -54,23 +61,32 @@ function Leaderboard() {
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6 select-none">
         <Profile_btn />
 
-        <div className="mb-4 ml-20 text-2xl font-bold font-itim w-fit">
+        <div className="mb-4 ml-20 text-2xl font-bold font-itim">
           <h1 className="text-5xl text-white mb-4 font-bold font-itim">
             Leaderboard
           </h1>
           <label htmlFor="difficulty" className="text-3xl ml-10">
             Select Difficulty:
           </label>
-          <select
-            id="difficulty"
-            className="ml-2 p-2 border border-gray-300 rounded-xl"
-            value={difficulty}
-            onChange={(e) => setDifficulty(e.target.value)}
-          >
-            <option value="easy">Certified Cherry</option>
-            <option value="medium">Getting There</option>
-            <option value="hard">Tomato Crusher</option>
-          </select>
+          <Tab.Group>
+            <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 w-2/6">
+              {tabs.map((tab, index) => (
+                <Tab
+                  key={index}
+                  className={({ selected }) =>
+                    `w-full rounded-xl text-2xl font-itim font-bold ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2 p-1 ${
+                      selected
+                        ? "bg-white text-black shadow"
+                        : "text-white hover:bg-white/[0.12] hover:text-white"
+                    }`
+                  }
+                  onClick={() => setDifficulty(tabs[index].value)}
+                >
+                  {tab.label}
+                </Tab>
+              ))}
+            </Tab.List>
+          </Tab.Group>
         </div>
 
         <div className="inline-flex justify-between w-full mt-24">
@@ -127,7 +143,6 @@ function Leaderboard() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
