@@ -9,7 +9,7 @@ const Time = () => {
         const fetchData = async () => {
           try {
             // Fetching country information using fetch
-            const ipResponse = await fetch("http://ip-api.com/json/");
+            const ipResponse = await fetch("https://ipapi.co/8.8.8.8/json/");
             const ipData = await ipResponse.json();
     
             // Fetching timezone information using fetch
