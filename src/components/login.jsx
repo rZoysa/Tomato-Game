@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import { app } from "/firebaseConfig";
 import { getDatabase, ref, get } from "firebase/database";
 import { Link } from "react-router-dom";
@@ -34,7 +38,7 @@ const Login = () => {
         setUserSession(user.uid, userData.username);
       }
 
-      navigate("/home", {replace : true});
+      navigate("/home", { replace: true });
     } catch (error) {
       switch (error.code) {
         case "auth/invalid-email":
@@ -49,13 +53,38 @@ const Login = () => {
           setError("Invalid email or password.");
           break;
         default:
-          setError(
-            "An error occurred during login. Please try again later."
-          );
+          setError("An error occurred during login. Please try again later.");
           break;
       }
     } finally {
       setLoading(false); // Set loading state to false when login process finishes
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    setLoading(true); // Set loading state to true when initiating password reset
+    setError(null); // Reset any previous errors
+
+    try {
+      const auth = getAuth(app);
+      await sendPasswordResetEmail(auth, email);
+      setError("Password reset email sent. Please check your inbox.");
+    } catch (error) {
+      switch (error.code) {
+        case "auth/invalid-email":
+          setError("Invalid email address.");
+          break;
+        case "auth/user-not-found":
+          setError("No user found with this email address.");
+          break;
+        default:
+          setError(
+            "Failed to send password reset email. Please try again later."
+          );
+          break;
+      }
+    } finally {
+      setLoading(false); // Set loading state to false after the process completes
     }
   };
 
@@ -115,7 +144,11 @@ const Login = () => {
                   className="border rounded-md p-2 mb-6 shadow-md border-solid border-[#1D87C3]"
                   required
                 />
+                <a onClick={handleForgotPassword} className="text-blue-500 cursor-pointer">
+                Forgot Password
+              </a>
               </div>
+              
             </div>
             <button
               type="submit"
