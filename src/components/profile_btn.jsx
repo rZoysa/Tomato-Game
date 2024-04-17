@@ -1,18 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import UserProfile from "./userProfile";
 
 function Profile_btn() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
+  const [showProfilePopup, setShowProfilePopup] = useState(false);
 
   var userName = localStorage.getItem("userName");
 
   if (!userName) {
     userName = "Guest";
   }
+
+  const toggleProfilePopup = () => {
+    setShowProfilePopup(!showProfilePopup);
+  };
 
   const clearUserSession = () => {
     localStorage.removeItem("userId");
@@ -103,14 +109,14 @@ function Profile_btn() {
               <>
                 <Menu.Item>
                   {({ active }) => (
-                    <Link
-                      to="/profile"
+                    <button
+                      onClick={toggleProfilePopup}
                       className={`${
                         active ? "bg-blue-500 text-white" : "text-gray-900"
                       } group flex w-full items-center rounded-md px-2 py-2 text-xl font-bold font-itim`}
                     >
                       Profile
-                    </Link>
+                    </button>
                   )}
                 </Menu.Item>
 
@@ -131,6 +137,9 @@ function Profile_btn() {
           </Menu.Items>
         </Transition>
       </Menu>
+      {showProfilePopup && (
+        <UserProfile onClose={toggleProfilePopup} userId={userId} />
+      )}
     </div>
   );
 }
