@@ -1,16 +1,16 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAPN-4Qg0mPss_ZuZX-lLCmMoSznXZTJpI",
-    authDomain: "tomato-game-d78b8.firebaseapp.com",
-    databaseURL: "https://tomato-game-d78b8-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "tomato-game-d78b8",
-    storageBucket: "tomato-game-d78b8.appspot.com",
-    messagingSenderId: "361506034708",
-    appId: "1:361506034708:web:4590ee75c2686bb7854301",
-    measurementId: "G-KGBCSHVLVZ"
-  };
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+};
 
 const app = initializeApp(firebaseConfig);
 
-export { app }; 
+export { app };
