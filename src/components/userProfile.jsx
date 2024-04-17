@@ -99,6 +99,16 @@ function UserProfile({ userId, onClose }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <motion.div
+        className=""
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.5,
+          delay: 0.1,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
       <div className="bg-white p-4 rounded-lg relative w-fit h-3/6">
         <button className="absolute top-0 right-0 m-2" onClick={onClose}>
           <svg
@@ -230,6 +240,7 @@ function UserProfile({ userId, onClose }) {
           </div>
         )}
       </div>
+      </motion.div>
     </div>
   );
 }
