@@ -36,7 +36,7 @@ function Difficulty() {
                   <img
                     src="mid.png"
                     alt="Bullet Point Image"
-                    className="w-12 h-10 mr-2"
+                    className="w-10 h-10 mr-2"
                   />
                   <Link to="/gameController/medium">Getting There</Link>
                   </motion.div>
