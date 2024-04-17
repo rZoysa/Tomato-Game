@@ -144,11 +144,16 @@ const Login = () => {
                   className="border rounded-md p-2 mb-6 shadow-md border-solid border-[#1D87C3]"
                   required
                 />
-                <a onClick={handleForgotPassword} className="text-blue-500 cursor-pointer">
-                Forgot Password
-              </a>
+
+                <div className="flex justify-center items-center">
+                  <a
+                    onClick={handleForgotPassword}
+                    className="text-blue-500 cursor-pointer w-fit"
+                  >
+                    Forgot Password
+                  </a>
+                </div>
               </div>
-              
             </div>
             <button
               type="submit"
