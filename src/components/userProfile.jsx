@@ -8,7 +8,7 @@ function UserProfile({ userId, onClose }) {
   const [userProfile, setUserProfile] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [editedUsername, setEditedUsername] = useState("");
-
+  const [usernameExistsError, setUsernameExistsError] = useState("");
   // Prop types validation
   UserProfile.propTypes = {
     userId: PropTypes.string.isRequired,
@@ -46,6 +46,17 @@ function UserProfile({ userId, onClose }) {
   const handleSaveClick = async () => {
     try {
       const dbRef = ref(getDatabase(app));
+
+      // Check if the edited username is the same as the original username
+      if (editedUsername.toLowerCase() !== userProfile.username.toLowerCase()) {
+        // If different, check if the new username already exists
+        const usernameExists = await checkUsernameExists(editedUsername);
+        if (usernameExists) {
+          setUsernameExistsError("*Username already exists");
+          return;
+        }
+      }
+
       await update(child(dbRef, `users/${userId}`), {
         username: editedUsername,
       });
@@ -60,6 +71,23 @@ function UserProfile({ userId, onClose }) {
       setEditMode(false);
     } catch (error) {
       console.error("Error saving profile:", error);
+    }
+  };
+
+  // Function to check if the username exists
+  const checkUsernameExists = async (username) => {
+    const dbRef = ref(getDatabase(app));
+    const usernameRef = child(dbRef, "users");
+    const snapshot = await get(usernameRef);
+
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      const usernames = Object.values(userData).map((user) =>
+        user.username.toLowerCase()
+      );
+      return usernames.includes(username.toLowerCase());
+    } else {
+      return false;
     }
   };
 
@@ -96,47 +124,61 @@ function UserProfile({ userId, onClose }) {
                 User Profile
               </h2>
             </u>
-            <p>
+            <div>
               Username:{" "}
               {editMode ? (
-                <input
-                  type="text"
-                  value={editedUsername}
-                  onChange={(e) => setEditedUsername(e.target.value)}
-                  className="border rounded-md p-1 mb-2 shadow-md border-solid border-gray-300"
-                />
+                <>
+                  <input
+                    type="text"
+                    value={editedUsername}
+                    onChange={(e) => {
+                      setEditedUsername(e.target.value);
+                      setUsernameExistsError(""); // Reset username exists error on input change
+                    }}
+                    className="border rounded-md p-1 mb-2 shadow-md border-solid border-gray-300"
+                  />
+                  {usernameExistsError && (
+                    <div className="text-red-500 text-lg text-center">
+                      {usernameExistsError}
+                    </div>
+                  )}
+                </>
               ) : (
                 userProfile.username
               )}
-            </p>
+            </div>
+
             <p>Email: {userProfile.email}</p>
-            <h3 className="text-3xl font-bold mt-4">Your Best Scores:</h3>
-            <p className="inline-flex justify-center items-center">
-              <img
-                src="easy.png"
-                alt="Bullet Point Image"
-                className="w-7 h-7 mr-2"
-              />
-              Certified Cherry: {userProfile.easy}
-            </p>
-            <br />
-            <p className="inline-flex justify-center items-center">
-              <img
-                src="mid.png"
-                alt="Bullet Point Image"
-                className="w-7 h-8 mr-2"
-              />
-              Getting There: {userProfile.medium}
-            </p>
-            <br />
-            <p className="inline-flex justify-center items-center">
-              <img
-                src="hard.png"
-                alt="Bullet Point Image"
-                className="w-7 h-7 mr-2"
-              />
-              Tomato Crusher: {userProfile.hard}
-            </p>
+            <div className="select-none">
+              <h3 className="text-3xl font-bold mt-4">Your Best Scores:</h3>
+              <p className="inline-flex justify-center items-center">
+                <img
+                  src="easy.png"
+                  alt="Bullet Point Image"
+                  className="w-7 h-7 mr-2"
+                />
+                Certified Cherry: {userProfile.easy}
+              </p>
+              <br />
+              <p className="inline-flex justify-center items-center">
+                <img
+                  src="mid.png"
+                  alt="Bullet Point Image"
+                  className="w-7 h-8 mr-2"
+                />
+                Getting There: {userProfile.medium}
+              </p>
+              <br />
+              <p className="inline-flex justify-center items-center">
+                <img
+                  src="hard.png"
+                  alt="Bullet Point Image"
+                  className="w-7 h-7 mr-2"
+                />
+                Tomato Crusher: {userProfile.hard}
+              </p>
+              <br />
+            </div>
             {/* Render edit and save buttons based on editMode */}
             {!editMode && (
               <div className="w-fit">
