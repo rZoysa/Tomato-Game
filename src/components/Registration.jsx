@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, set, child } from "firebase/database";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { getDatabase, ref, set, child, get } from "firebase/database";
 import { app } from "/firebaseConfig";
 import { Link } from "react-router-dom";
 
@@ -14,6 +14,31 @@ const Registration = () => {
   const [error, setError] = useState(null);
   const [passwordMatchError, setPasswordMatchError] = useState("");
   const [passwordLengthError, setPasswordLengthError] = useState("");
+  const [usernameExistsError, setUsernameExistsError] = useState("");
+  const [btnDisabled, setbtnDiasabled] = useState(true);
+
+  useEffect(() => {
+    checkUsernameExists(username);
+  }, [username]);
+
+  //Check if the username exists
+  const checkUsernameExists = async (username) => {
+    const dbRef = ref(getDatabase(app));
+    const usernameRef = child(dbRef, "users");
+    const snapshot = await get(usernameRef);
+
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      const usernames = Object.values(userData).map((user) => user.username.toLowerCase());
+      if (usernames.includes(username.toLowerCase())) {
+        setUsernameExistsError("Username already exists");
+      } else {
+        setUsernameExistsError("");
+      }
+    } else {
+      setUsernameExistsError("");
+    }
+  };
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -32,6 +57,9 @@ const Registration = () => {
       );
       const user = userCredential.user;
 
+      // Send email verification
+      await sendEmailVerify(user);
+
       const uid = user.uid;
 
       const dbRef = ref(getDatabase(app));
@@ -46,7 +74,7 @@ const Registration = () => {
 
       //   console.log("User registered:", user.uid);
       setUserSession(uid, username);
-      navigate("/home", {replace : true});
+      navigate("/home", { replace: true });
     } catch (error) {
       // Handle specific registration errors and provide meaningful messages
       switch (error.code) {
@@ -62,6 +90,17 @@ const Registration = () => {
           );
           break;
       }
+    }
+  };
+
+  // Function to send email verification
+  const sendEmailVerify = async (user) => {
+    try {
+      await sendEmailVerification(user);
+      console.log("Verification email sent");
+    } catch (error) {
+      console.error("Error sending verification email:", error);
+      // Handle error sending verification email
     }
   };
 
@@ -96,6 +135,14 @@ const Registration = () => {
     }
   };
 
+  useEffect(() => {
+    if(usernameExistsError !== "" || passwordLengthError !== "" || passwordMatchError !== ""){
+      setbtnDiasabled(false);
+    }else{
+      setbtnDiasabled(true);
+    }
+  }, [passwordLengthError, passwordMatchError, usernameExistsError]);
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6 flex justify-center items-center">
@@ -129,6 +176,9 @@ const Registration = () => {
                   className="border rounded-md p-2 mb-2 shadow-md border-solid border-[#1D87C3]"
                   required
                 />
+                {usernameExistsError && (
+                  <p className="text-red-500">{usernameExistsError}</p>
+                )}
               </div>
               <div className="mb-4 flex flex-col">
                 <label
@@ -190,7 +240,8 @@ const Registration = () => {
             </div>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md w-1/5 mb-8"
+              className={`bg-blue-500 text-white px-4 py-2 rounded-md w-1/5 mb-8 ${!btnDisabled ? 'opacity-50' : ''}`}
+              disabled = {!btnDisabled}
             >
               Register
             </button>
