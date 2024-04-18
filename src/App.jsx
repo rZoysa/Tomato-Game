@@ -17,7 +17,6 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Landing_Page/>}/>
-        <Route path='/gg' element={<Time/>}/>
         <Route path="/login" element={<Login />} />
         <Route path='/Registration' element={<Registration/>}/>
         <Route path="/home" element={<Home />} />
