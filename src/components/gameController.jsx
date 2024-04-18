@@ -261,7 +261,7 @@ function GameController() {
               <img src={imageUrl} alt="Tomato" className="w-full" />
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mt-5">
               {numbers.map((number) => (
                 <motion.div
                   key={number}
