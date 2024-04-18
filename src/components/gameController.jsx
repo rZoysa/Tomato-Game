@@ -260,7 +260,6 @@ function GameController() {
             <div>
               <img src={imageUrl} alt="Tomato" className="w-full" />
             </div>
-            <p>Solution: {solution}</p>
 
             <div className="flex items-center justify-between">
               {numbers.map((number) => (
