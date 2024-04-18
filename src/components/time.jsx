@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { format } from 'date-fns';
 
 const Time = () => {
   const [time, setTime] = useState("");
@@ -39,7 +40,7 @@ const Time = () => {
       ) : (
         <div>
           <h2 className="text-4xl font-itim text-white">
-            {new Date(time).toLocaleTimeString()}
+          {format(time, "HH:mm:ss")}
           </h2>
         </div>
       )}
