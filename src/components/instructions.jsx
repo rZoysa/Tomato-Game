@@ -5,15 +5,15 @@ function instructions() {
     <div className="flex justify-center items-center h-screen">
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6">
         <Profile_btn />
-        <div className="text-2xl font-itim ml-10 text-white">
-          <h1>
-           <span className="font-bold text-3xl"> Objective: </span>Your goal is to find the hidden number within the
+        <div className="text-2xl font-itim ml-10 text-white overflow-y-auto h-fit md:h-3/6 lg:h-fit">
+          <h1 className="md:text-lg lg:text-xl">
+           <span className="font-bold text-3xl md:text-xl lg:text-3xl"> Objective: </span>Your goal is to find the hidden number within the
             mathematical equations before time runs out and without losing all
             your lives.
           </h1>
 
-          <h1>
-            <p className="font-bold text-3xl">
+          <h1 className="md:text-lg">
+            <p className="font-bold text-3xl md:text-xl lg:text-3xl">
             Difficulty Levels:
             </p>
             <div className="ml-16">
@@ -31,8 +31,8 @@ function instructions() {
             </div>
           </h1>
 
-          <h1>
-          <p className="font-bold text-3xl">
+          <h1 className="md:text-lg">
+          <p className="font-bold text-3xl md:text-xl lg:text-3xl">
             Gameplay:
             </p>
             <div className="ml-16">
@@ -68,7 +68,7 @@ function instructions() {
 
          
 
-          <h1>
+          <h1 className="md:text-lg ">
           <p className="font-bold text-3xl">
             Hints:
             </p>
@@ -87,7 +87,7 @@ function instructions() {
             </div>
           </h1>
 
-          <h1>
+          <h1 className="md:text-lg ">
           <span className="font-bold text-3xl">Restart: </span>If you wish to restart the game at any time, you can do so
             from the restart button.
           </h1>
