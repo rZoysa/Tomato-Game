@@ -5,7 +5,7 @@ function instructions() {
     <div className="flex justify-center items-center h-screen">
       <div className="bg-[#3191B0] bg-opacity-80 rounded-3xl w-11/12 h-5/6 flex flex-col">
         <Profile_btn />
-        <div className="text-2xl font-itim ml-10 text-white overflow-y-auto h-fit sm:h-48 lg:flex-grow no-scrollbar">
+        <div className="text-2xl font-itim ml-10 text-white overflow-y-auto h-fit sm:flex-grow lg:flex-grow no-scrollbar">
           <h1 className="md:text-lg lg:text-xl">
            <span className="font-bold text-3xl md:text-xl lg:text-3xl"> Objective: </span>Your goal is to find the hidden number within the
             mathematical equations before time runs out and without losing all
