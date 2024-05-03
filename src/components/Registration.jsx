@@ -4,6 +4,8 @@ import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "
 import { getDatabase, ref, set, child, get } from "firebase/database";
 import { app } from "/firebaseConfig";
 import { Link } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const Registration = () => {
   const [username, setUsername] = useState("");
@@ -16,10 +18,15 @@ const Registration = () => {
   const [passwordLengthError, setPasswordLengthError] = useState("");
   const [usernameExistsError, setUsernameExistsError] = useState("");
   const [btnDisabled, setbtnDiasabled] = useState(true);
+  const [ passwordFieldType, setPasswordFieldType] = useState("password");
 
   useEffect(() => {
     checkUsernameExists(username);
   }, [username]);
+
+  const togglePasswordFieldType = () => {
+    setPasswordFieldType(passwordFieldType === 'password' ? 'text' : 'password');
+  };
 
   //Check if the username exists
   const checkUsernameExists = async (username) => {
@@ -197,7 +204,7 @@ const Registration = () => {
                   required
                 />
               </div>
-              <div className="mb-4 flex flex-col">
+              <div className="mb-4 flex flex-col relative">
                 <label
                   htmlFor="password"
                   className="text-gray-700 text-sm font-bold mb-2 text-left"
@@ -205,27 +212,37 @@ const Registration = () => {
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={passwordFieldType}
                   id="password"
                   placeholder="Password"
                   value={password}
                   onChange={handlePasswordChange}
                   className="border rounded-md p-2 mb-2 shadow-md border-solid border-[#1D87C3]"
                   required
-                />
+                /> 
+                {/* add the icons */}
+                <div className="absolute right-5 top-10 cursor-pointer" onClick={togglePasswordFieldType}>
+                  {(passwordFieldType === 'password') ? (
+                    <FaEye />
+                  ) : (
+                    <FaEyeSlash />
+                  )}
+                </div>
+                
                 {passwordLengthError && (
                   <p className="text-red-500">{passwordLengthError}</p>
                 )}
+
               </div>
-              <div className="mb-4 flex flex-col">
+              <div className="mb-4 flex flex-col relative">
                 <label
                   htmlFor="confirmPassword"
-                  className="text-gray-700 text-sm font-bold mb-2 text-left"
+                  className="text-gray-700 text-sm font-bold mb-2 text-left select-none"
                 >
                   Confirm Password
                 </label>
                 <input
-                  type="password"
+                  type={passwordFieldType}
                   id="confirmPassword"
                   placeholder="Confirm Password"
                   value={confirmPassword}
@@ -233,6 +250,13 @@ const Registration = () => {
                   className="border rounded-md p-2 mb-2 shadow-md border-solid border-[#1D87C3]"
                   required
                 />
+                <div className="absolute right-5 top-10 cursor-pointer" onClick={togglePasswordFieldType}>
+                  {(passwordFieldType === 'password') ? (
+                    <FaEye />
+                  ) : (
+                    <FaEyeSlash />
+                  )}
+                </div>
                 {passwordMatchError && (
                   <p className="text-red-500">{passwordMatchError}</p>
                 )}

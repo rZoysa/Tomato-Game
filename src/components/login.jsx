@@ -8,6 +8,8 @@ import {
 import { app } from "/firebaseConfig";
 import { getDatabase, ref, get } from "firebase/database";
 import { Link } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +17,11 @@ const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [ passwordFieldType, setPasswordFieldType] = useState("password");
+
+  const togglePasswordFieldType = () => {
+    setPasswordFieldType(passwordFieldType === 'password' ? 'text' : 'password');
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -127,7 +134,7 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="mb-4 flex flex-col">
+              <div className="mb-4 flex flex-col relative">
                 <label
                   htmlFor="password"
                   className="text-gray-700 text-sm font-bold mb-2 text-left"
@@ -136,7 +143,7 @@ const Login = () => {
                 </label>
 
                 <input
-                  type="password"
+                  type={passwordFieldType}
                   id="password"
                   placeholder="Password"
                   value={password}
@@ -144,6 +151,13 @@ const Login = () => {
                   className="border rounded-md p-2 mb-6 shadow-md border-solid border-[#1D87C3]"
                   required
                 />
+                <div className="absolute right-5 top-10 cursor-pointer" onClick={togglePasswordFieldType}>
+                  {(passwordFieldType === 'password') ? (
+                    <FaEye />
+                  ) : (
+                    <FaEyeSlash />
+                  )}
+                </div>
 
                 <div className="flex justify-center items-center">
                   <a
