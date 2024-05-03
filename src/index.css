@@ -7,6 +7,8 @@
 body {
   background-image: url('./assets/Background.jpg'); /* Example background image */
   background-size: cover; /* Cover the entire background */
+  height: 100vh; /* Set height to 100% of the viewport height */
+  width: 100vw; /* Set width to 100% of the viewport width */
 }
 
 .font-itim {
