@@ -26,7 +26,7 @@ function App() {
         <Route path='/instructions' element={<Instructions/>}></Route>
       </Routes>
       
-        <Time/>
+        {/* <Time/> */}
       
     </Router>
   );
